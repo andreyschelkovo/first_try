@@ -4,6 +4,7 @@
 #include <QTcpServer>//1добавили библиотеки тсп сервера и сокета
 #include <QTcpSocket>
 #include <QVector>// 5 подключаем библиотеку для создания векторов
+#include <QTime> // 104 для сервера повторяем тоже самое
 
 class Server : public QTcpServer//2унаследовали от ктсп сервера
 {
@@ -21,5 +22,5 @@ public slots:
     void slotReadyRead();//10 ф. слот для сигнала. обр-чик полученных от кл. сообщ.
 
 };
-
+///try to see this file
 #endif // SERVER_H

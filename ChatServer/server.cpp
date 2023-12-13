@@ -51,7 +51,8 @@ void Server::slotReadyRead(){
                 break;                                                  //к
             }                                                           //л
             QString str;                                                //и
-            in >> str;                                                  //ен
+            QTime time;
+            in >> time>> str;                                                  //ен
             nextBlockSize = 0;                                          //те
             qDebug() << str;//-28.5 доп вывод сообщения в консоль
             SendToClient(str);//-27.3- передача строки
@@ -69,7 +70,7 @@ void Server::SendToClient(QString str){
                                                 //хз но типа не будет по другому работать
     out.setVersion(QDataStream::Qt_6_4);//26 снова версия, та же что и в in
 
-    out <<quint16(0) << str;                        //-29копия из клиента--
+    out <<quint16(0) << QTime::currentTime() << str;                        //-29копия из клиента--
     out.device()->seek(0);                          //записываем нашу строку в массив байт Data передаём переменную quint16 с параметром 0
     out <<quint16(Data.size() - sizeof(quint16));   //чтобы вместе с переданым сообщением было передано 16 пустых бит и сообщение началось с 17-ого бита
                                                     //идём в начало блока и записываем туда разность размера всего сообщения и переменной quint16
