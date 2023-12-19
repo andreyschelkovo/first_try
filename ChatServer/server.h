@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QVector>// 5 подключаем библиотеку для создания векторов
 #include <QTime> // 104 для сервера повторяем тоже самое
+#include <QSqlDatabase>
+#include <QDebug>
 
 class Server : public QTcpServer//2унаследовали от ктсп сервера
 {
@@ -17,6 +19,7 @@ private:
     QByteArray Data;// 7 тип данных(массив байтов) который будет передаваться между сервером и клиентом
     void SendToClient(QString str);//8 объявляю функцию для передачи данных клиенту
     quint16 nextBlockSize;//-27-повторяем как в клиенте
+
 public slots:
     void incomingConnection(qintptr socketDescriptor);//9ф для обр-ки новю подкл.
     void slotReadyRead();//10 ф. слот для сигнала. обр-чик полученных от кл. сообщ.

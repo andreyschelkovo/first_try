@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTcpSocket>//1 подкл библ сокет
 #include <QTime> // 100 подключаем бибблиотеку для отображения тамй меток с сообщениями
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

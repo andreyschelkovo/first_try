@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     socket = new QTcpSocket(this);//4 инициализируем сокет
     connect(socket,&QTcpSocket::readyRead,this,&MainWindow::slotReadyRead);//5 подкл так же как и на сервере (но с клиент сокетом)
     connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);//6 -//-
