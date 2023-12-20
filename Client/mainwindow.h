@@ -5,6 +5,7 @@
 #include <QTcpSocket>//1 подкл библ сокет
 #include <QTime> // 100 подключаем бибблиотеку для отображения тамй меток с сообщениями
 #include <QMessageBox>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,12 +23,15 @@ private slots:
     void on_connect_btn_clicked();//5 ...
     void on_send_btn_clicked();
     void on_lineEdit_returnPressed();//16 для отправки по нажатию энтер
+    void on_pushButton_your_name_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *socket; //2 создаём клиентский сокет
     QByteArray Data;// 3 создаём массив байтов
     void SendToServer(QString str); //14...
     quint16 nextBlockSize;//-17- целое положительное число размером 16 бит для контроля объёма полученной информации
+    QString your_name;
 public slots:
     void slotReadyRead();//7...
 

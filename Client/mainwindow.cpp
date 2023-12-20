@@ -63,9 +63,12 @@ void MainWindow::slotReadyRead()
             }
             QString str;//-23-если мы еще внутри цикла, то создаём строку...
             QTime time;//101 создаём переменную время
+            QDateTime date = QDateTime::currentDateTime();
+
             in >> time >> str; //-24- считываем в неё данные //102 добавляем в поток время
             nextBlockSize = 0;// -25- обнуляем размер блока для обработки нового сообщения
-            ui->textBrowser->append(time.toString() + " " + str);//-26- выводим строку в текстовое окно клиента //103 отображаем время в интерфейсе
+            ui->textBrowser->append(date.toString("dd.MM.yyyy"));
+            ui->textBrowser->append(time.toString() + " " + your_name + ": " + str);//-26- выводим строку в текстовое окно клиента //103 отображаем время в интерфейсе
         }
     }else {
         ui->textBrowser->append("Error");//13 при ошибке туда же печатаем ошибку
@@ -83,5 +86,18 @@ void MainWindow::on_lineEdit_returnPressed()
 {
 
     SendToServer(ui->lineEdit->text());//16 -//- но по нажатию энтер в строке ввода
+}
+
+
+void MainWindow::on_pushButton_your_name_clicked()
+{
+    your_name = ui->lineEdit_name->text();
+    if (your_name == ui->lineEdit_name->text()){
+        ui->textBrowser->append("The name is changed");
+        ui->lineEdit_name->clear();
+        SendToServer("The name is changed");
+        SendToServer(your_name);
+    }
+
 }
 
