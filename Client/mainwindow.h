@@ -25,6 +25,8 @@ private slots:
     void on_lineEdit_returnPressed();//16 для отправки по нажатию энтер
     void on_pushButton_your_name_clicked();
 
+    void on_lineEdit_name_returnPressed();
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *socket; //2 создаём клиентский сокет

@@ -54,7 +54,9 @@ void Server::slotReadyRead(){
             QTime time;
             in >> time>> str;                                                  //ен
             nextBlockSize = 0;                                          //те
+            qDebug() << time.toString();
             qDebug() << str;//-28.5 доп вывод сообщения в консоль
+
             SendToClient(str);//-27.3- передача строки
             break;//-28- принудительно выходим из цикла
         }

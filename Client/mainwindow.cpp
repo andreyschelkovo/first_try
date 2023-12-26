@@ -101,3 +101,15 @@ void MainWindow::on_pushButton_your_name_clicked()
 
 }
 
+
+void MainWindow::on_lineEdit_name_returnPressed()
+{
+    your_name = ui->lineEdit_name->text();
+    if (your_name == ui->lineEdit_name->text()){
+        ui->textBrowser->append("The name is changed");
+        ui->lineEdit_name->clear();
+        SendToServer("The name is changed");
+        SendToServer(your_name);
+    }
+}
+
