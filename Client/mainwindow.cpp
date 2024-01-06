@@ -81,7 +81,7 @@ void MainWindow::on_send_btn_clicked()
     SendToServer(ui->lineEdit->text());//15 вызов функции отправки сообщ на сервер и отрисовка его в окне чата по клику на кнопку
 }
 
-
+//123325
 void MainWindow::on_lineEdit_returnPressed()
 {
 
