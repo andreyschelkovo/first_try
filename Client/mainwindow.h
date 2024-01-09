@@ -33,7 +33,7 @@ private:
     QByteArray Data;// 3 создаём массив байтов
     void SendToServer(QString str); //14...
     quint16 nextBlockSize;//-17- целое положительное число размером 16 бит для контроля объёма полученной информации
-    QString your_name;
+    QString nickname;
 public slots:
     void slotReadyRead();//7...
 

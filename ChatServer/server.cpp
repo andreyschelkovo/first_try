@@ -24,7 +24,7 @@ void Server::incomingConnection(qintptr socketDescriptor){
 
 }
 
-void Server::slotReadyRead(){
+void Server::slotReadyRead(){//сюда попадаю после набора сообщения в клиенте и нажаии кнопки отправить
 
     socket = (QTcpSocket*)sender();//19 запись в переменную именно того сокета с которого пришёл запрос
     QDataStream in(socket);//20 инструмент для приёма передачи данных(класс для работы с потоковым вводом-выводом данных
@@ -50,11 +50,11 @@ void Server::slotReadyRead(){
                 qDebug() << "Data not full,Break";//-28.4доп
                 break;                                                  //к
             }                                                           //л
-            QString str;                                                //и
-            QTime time;
-            in >> time>> str;                                                  //ен
+            QString str;
+            QDateTime date;
+            in >> date>> str ;                                 //ен
             nextBlockSize = 0;                                          //те
-            qDebug() << time.toString();
+            qDebug() << date.toString();
             qDebug() << str;//-28.5 доп вывод сообщения в консоль
 
             SendToClient(str);//-27.3- передача строки

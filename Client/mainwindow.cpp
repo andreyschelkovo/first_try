@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    nickname = "anon";
 
     socket = new QTcpSocket(this);//4 инициализируем сокет
     connect(socket,&QTcpSocket::readyRead,this,&MainWindow::slotReadyRead);//5 подкл так же как и на сервере (но с клиент сокетом)
@@ -33,7 +34,9 @@ void MainWindow::SendToServer(QString str)      //14 тут один в один
     QDataStream out(&Data,QIODevice::WriteOnly);//созд объект out (вывод) , параметрами будут наш массив байтов и режим работы "только запись"
                                                 //хз но типа не будет по другому работать
     out.setVersion(QDataStream::Qt_6_2);        // снова версия, та же что и в in
-    out <<quint16(0) << QTime::currentTime() << str;                    // записываем нашу строку в массив байт Data ---17--- передаём переменную quint16 с параметром 0
+    QDateTime date;
+    date = date.currentDateTime();
+    out <<quint16(0) << date << str;                    // записываем нашу строку в массив байт Data ---17--- передаём переменную quint16 с параметром 0
  //-17-чтобы вместе с переданым сообщением было передано 16 пустых бит и сообщение началось с 17-ого бита
     out.device()->seek(0); //-17-идём в начало блока и...
     out <<quint16(Data.size() - sizeof(quint16));//...записываем туда разность размера всего сообщения и переменной quint16
@@ -63,12 +66,13 @@ void MainWindow::slotReadyRead()
             }
             QString str;//-23-если мы еще внутри цикла, то создаём строку...
             QTime time;//101 создаём переменную время
-            QDateTime date = QDateTime::currentDateTime();
+            QDateTime date;
 
-            in >> time >> str; //-24- считываем в неё данные //102 добавляем в поток время
+
+            in >> time >> str >> date; //-24- считываем в неё данные //102 добавляем в поток время
             nextBlockSize = 0;// -25- обнуляем размер блока для обработки нового сообщения
             ui->textBrowser->append(date.toString("dd.MM.yyyy"));
-            ui->textBrowser->append(time.toString() + " " + your_name + ": " + str);//-26- выводим строку в текстовое окно клиента //103 отображаем время в интерфейсе
+           /////////////////// ui->textBrowser->append(time.toString() + " " + nickname + ": " + str + "--" );//-26- выводим строку в текстовое окно клиента //103 отображаем время в интерфейсе
         }
     }else {
         ui->textBrowser->append("Error");//13 при ошибке туда же печатаем ошибку
@@ -91,12 +95,12 @@ void MainWindow::on_lineEdit_returnPressed()
 
 void MainWindow::on_pushButton_your_name_clicked()
 {
-    your_name = ui->lineEdit_name->text();
-    if (your_name == ui->lineEdit_name->text()){
+     nickname = ui->lineEdit_name->text();
+    if (nickname == ui->lineEdit_name->text()) {
         ui->textBrowser->append("The name is changed");
         ui->lineEdit_name->clear();
-        SendToServer("The name is changed");
-        SendToServer(your_name);
+        //SendToServer("The name is changed");
+       // SendToServer(ni);
     }
 
 }
@@ -104,12 +108,12 @@ void MainWindow::on_pushButton_your_name_clicked()
 
 void MainWindow::on_lineEdit_name_returnPressed()
 {
-    your_name = ui->lineEdit_name->text();
-    if (your_name == ui->lineEdit_name->text()){
+    nickname = ui->lineEdit_name->text();
+    if (nickname == ui->lineEdit_name->text()) {
         ui->textBrowser->append("The name is changed");
         ui->lineEdit_name->clear();
-        SendToServer("The name is changed");
-        SendToServer(your_name);
+       // SendToServer("The name is changed");
+       // SendToServer(your_name);
     }
 }
 

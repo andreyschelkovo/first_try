@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QVector>// 5 подключаем библиотеку для создания векторов
 #include <QTime> // 104 для сервера повторяем тоже самое
+#include <QDateTime>
 #include <QSqlDatabase>
 #include <QDebug>
 
