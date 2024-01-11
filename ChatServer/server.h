@@ -20,6 +20,7 @@ private:
     QByteArray Data;// 7 тип данных(массив байтов) который будет передаваться между сервером и клиентом
     void SendToClient(QString str);//8 объявляю функцию для передачи данных клиенту
     quint16 nextBlockSize;//-27-повторяем как в клиенте
+    QString nickname;
 
 public slots:
     void incomingConnection(qintptr socketDescriptor);//9ф для обр-ки новю подкл.

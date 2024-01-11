@@ -52,9 +52,10 @@ void Server::slotReadyRead(){//сюда попадаю после набора �
             }                                                           //л
             QString str;
             QDateTime date;
-            in >> date>> str ;                                 //ен
+            in >> date >> nickname >> str ;                                 //ен
             nextBlockSize = 0;                                          //те
             qDebug() << date.toString();
+            qDebug() << nickname;
             qDebug() << str;//-28.5 доп вывод сообщения в консоль
 
             SendToClient(str);//-27.3- передача строки
