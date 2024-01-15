@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>//1 подкл библ сокет
+#include <QTcpServer>
 #include <QTime> // 100 подключаем бибблиотеку для отображения тамй меток с сообщениями
 #include <QMessageBox>
 #include <QDateTime>
@@ -29,13 +30,17 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QTcpSocket *socket; //2 создаём клиентский сокет
+    QTcpSocket *clientsocket; //2 создаём клиентский сокет
     QByteArray Data;// 3 создаём массив байтов
     void SendToServer(QString str); //14...
     quint16 nextBlockSize;//-17- целое положительное число размером 16 бит для контроля объёма полученной информации
     QString nickname;
 public slots:
     void slotReadyRead();//7...
+
+signals:
+    void nicknane_changeCL_sig();
+
 
 };
 #endif // MAINWINDOW_H

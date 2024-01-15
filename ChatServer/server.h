@@ -9,6 +9,7 @@
 #include <QSqlDatabase>
 #include <QDebug>
 
+
 class Server : public QTcpServer//2унаследовали от ктсп сервера
 {
     Q_OBJECT // 3 для использования сигнально-слотовых связей
@@ -21,10 +22,12 @@ private:
     void SendToClient(QString str);//8 объявляю функцию для передачи данных клиенту
     quint16 nextBlockSize;//-27-повторяем как в клиенте
     QString nickname;
+    QSqlDatabase db;
 
 public slots:
     void incomingConnection(qintptr socketDescriptor);//9ф для обр-ки новю подкл.
     void slotReadyRead();//10 ф. слот для сигнала. обр-чик полученных от кл. сообщ.
+    void nickname_changeSRV_slot();
 
 };
 ///try to see this file

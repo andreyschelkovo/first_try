@@ -9,6 +9,15 @@ Server::Server()//11 описание конструктора
         qDebug() <<"Error";
     }
     nextBlockSize = 0; //-30 обнуляем переменную так же как и в клиенте перед использованием
+
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("./testBD.db");
+    if (db.open()){
+        qDebug ("db open");
+    }
+    else{
+        qDebug ("db no open");
+    }
  }
 
 
@@ -72,8 +81,9 @@ void Server::SendToClient(QString str){
     QDataStream out(&Data,QIODevice::WriteOnly);//25 созд объект out (вывод) , параметрами будут наш массив байтов и режим работы "только запись"
                                                 //хз но типа не будет по другому работать
     out.setVersion(QDataStream::Qt_6_4);//26 снова версия, та же что и в in
-
-    out <<quint16(0) << QTime::currentTime() << str;                        //-29копия из клиента--
+    QDateTime date;
+    date = date.currentDateTime();
+    out <<quint16(0) << date << nickname << str;                        //-29копия из клиента--
     out.device()->seek(0);                          //записываем нашу строку в массив байт Data передаём переменную quint16 с параметром 0
     out <<quint16(Data.size() - sizeof(quint16));   //чтобы вместе с переданым сообщением было передано 16 пустых бит и сообщение началось с 17-ого бита
                                                     //идём в начало блока и записываем туда разность размера всего сообщения и переменной quint16
@@ -86,6 +96,10 @@ void Server::SendToClient(QString str){
         Sockets[i]->write(Data);
     }
 
+
+}
+
+void Server::nickname_changeSRV_slot(){
 
 }
 
