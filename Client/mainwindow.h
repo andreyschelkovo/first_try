@@ -29,6 +29,7 @@ private slots:
     void on_lineEdit_name_returnPressed();
 
 private:
+
     Ui::MainWindow *ui;
     QTcpSocket *clientsocket; //2 создаём клиентский сокет
     QByteArray Data;// 3 создаём массив байтов

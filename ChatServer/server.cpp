@@ -33,6 +33,8 @@ void Server::incomingConnection(qintptr socketDescriptor){
 
 }
 
+
+
 void Server::slotReadyRead(){//сюда попадаю после набора сообщения в клиенте и нажаии кнопки отправить
 
     socket = (QTcpSocket*)sender();//19 запись в переменную именно того сокета с которого пришёл запрос
